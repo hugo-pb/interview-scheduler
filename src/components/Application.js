@@ -40,7 +40,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        <DayList days={days} day={day} setDay={setDay} />
+        <DayList days={days} value={day} onChange={setDay} />
       </section>
     </main>
   );
