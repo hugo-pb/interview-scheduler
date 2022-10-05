@@ -1,15 +1,34 @@
 import React from "react";
-
-const InterviewerListItem = () => {
+import "components/InterviewerListItem.scss";
+const InterviewerListItem = (props) => {
+  console.log(props);
   return (
-    <li className="interviewers__item">
-      <img
-        className="interviewers__item-image"
-        src="https://i.imgur.com/LpaY82x.png"
-        alt="Sylvia Palmer"
-      />
-      Sylvia Palmer
-    </li>
+    <>
+      {props.selected ? (
+        <li
+          className="interviewers__item  interviewers__item--selected"
+          onClick={() => props.setInterviewer(props.id)}
+        >
+          <img
+            className="interviewers__item-image"
+            src={props.avatar}
+            alt={props.name}
+          />
+          {props.name}
+        </li>
+      ) : (
+        <li
+          className="interviewers__item"
+          onClick={() => props.setInterviewer(props.id)}
+        >
+          <img
+            className="interviewers__item-image"
+            src={props.avatar}
+            alt={props.name}
+          />
+        </li>
+      )}
+    </>
   );
 };
 
