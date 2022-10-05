@@ -3,7 +3,7 @@ import React from "react";
 import "components/DayListItem.scss";
 
 export default function DayListItem(props) {
-  let dayItemClass = classNames("day-list__item", {
+  const dayItemClass = classNames("day-list__item", {
     "day-list__item--selected": props.selected,
     "day-list__item--full": !props.spots,
   });
