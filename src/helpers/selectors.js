@@ -19,3 +19,5 @@ export function getAppointmentsForDay(state, nameDay) {
   });
   return arr, arr2;
 }
+
+export function getInterview(state, interview) {}
