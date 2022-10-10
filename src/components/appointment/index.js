@@ -30,6 +30,7 @@ export default function Appointment(props) {
 
   const onDelete = () => {
     props.cancelInterview(props.id);
+    transition(EMPTY);
   };
   return (
     <article className="appointment">

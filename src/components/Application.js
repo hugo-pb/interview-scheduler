@@ -57,7 +57,15 @@ export default function Application() {
 
   const cancelInterview = (id) => {
     // set interview of appointment to null
-    console.log(id);
+    const appointment = {
+      ...state.appointments[id],
+      interview: null,
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    setState({ ...state, appointments });
   };
 
   const appointmentsList = dailyAppointments.map((app) => {
