@@ -41,11 +41,11 @@ export default function Appointment(props) {
   };
 
   const onDelete = () => {
-    transition(DELETING);
-    props.cancelInterview(props.id);
-    setTimeout(() => {
-      transition(EMPTY);
-    }, 1000);
+    transition(DELETING, true);
+    props
+      .cancelInterview(props.id)
+      .then(() => transition(EMPTY))
+      .catch((error) => transition(ERROR_DELETE, true));
   };
   return (
     <article className="appointment">
@@ -85,6 +85,12 @@ export default function Appointment(props) {
         />
       )}
       {mode === ERROR_SAVE && (
+        <Error
+          message="oops... it looks like something went wrong please try again"
+          onClose={back}
+        />
+      )}
+      {mode === ERROR_DELETE && (
         <Error
           message="oops... it looks like something went wrong please try again"
           onClose={back}

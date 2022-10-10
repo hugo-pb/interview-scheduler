@@ -66,7 +66,7 @@ export default function Application() {
       [id]: appointment,
     };
 
-    axios.delete(`/api/appointments/${id}`).then(() => {
+    return axios.delete(`/api/appointments/${id}`).then(() => {
       setState({
         ...state,
         appointments,
