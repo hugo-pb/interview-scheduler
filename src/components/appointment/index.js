@@ -28,6 +28,9 @@ export default function Appointment(props) {
     }, 2500);
   };
 
+  const onDelete = () => {
+    props.cancelInterview(props.id);
+  };
   return (
     <article className="appointment">
       <Header time={props.time} />
@@ -36,6 +39,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={onDelete}
         />
       )}
       {mode === CREATE && (

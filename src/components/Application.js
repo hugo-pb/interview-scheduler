@@ -55,6 +55,11 @@ export default function Application() {
       });
   }
 
+  const cancelInterview = (id) => {
+    // set interview of appointment to null
+    console.log(id);
+  };
+
   const appointmentsList = dailyAppointments.map((app) => {
     const interview = getInterview(state, app.interview);
     return (
@@ -65,6 +70,7 @@ export default function Application() {
         interview={interview}
         interviewers={dailyInterviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
