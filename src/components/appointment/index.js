@@ -33,7 +33,7 @@ export default function Appointment(props) {
     props
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch((error) => transition(ERROR_SAVE));
+      .catch((error) => transition(ERROR_SAVE, true));
   };
 
   const confirm = (type) => {
@@ -84,7 +84,12 @@ export default function Appointment(props) {
           onCancel={back}
         />
       )}
-      {mode === ERROR_SAVE && <Error message="Deleting" />}
+      {mode === ERROR_SAVE && (
+        <Error
+          message="oops... it looks like something went wrong please try again"
+          onClose={back}
+        />
+      )}
     </article>
   );
 }

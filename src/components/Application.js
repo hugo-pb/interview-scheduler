@@ -45,7 +45,7 @@ export default function Application() {
       [id]: appointment,
     };
 
-    axios
+    return axios
       .put(`/api/appointments/${id}`, { interview: { ...interview } })
       .then(() => {
         setState({
