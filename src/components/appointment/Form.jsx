@@ -28,6 +28,7 @@ const Form = (props) => {
             onChange={(e) => {
               setStudent(e.target.value);
             }}
+            data-testid="student-name-input"
           />
         </form>
         <InterviewerList
