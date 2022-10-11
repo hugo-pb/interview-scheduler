@@ -41,6 +41,7 @@ const useApplicationData = () => {
           ...state,
           appointments,
         });
+        getSpots(true);
       });
   }
 
@@ -60,7 +61,15 @@ const useApplicationData = () => {
         ...state,
         appointments,
       });
+      getSpots(false);
     });
+  };
+
+  const getSpots = (increment) => {
+    if (increment) {
+      return console.log("adding one");
+    }
+    return console.log("removing one");
   };
 
   return { state, setDay, bookInterview, cancelInterview };
