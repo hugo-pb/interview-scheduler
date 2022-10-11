@@ -37,8 +37,7 @@ const useApplicationData = () => {
     };
 
     /// i
-    const days = getSpots(true);
-
+    const days = getSpots(id, appointments);
     return axios
       .put(`/api/appointments/${id}`, { interview: { ...interview } })
       .then(() => {
@@ -60,7 +59,7 @@ const useApplicationData = () => {
       ...state.appointments,
       [id]: appointment,
     };
-    const days = getSpots(false);
+    const days = getSpots(id, appointments);
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
       setState({
@@ -71,18 +70,20 @@ const useApplicationData = () => {
     });
   };
 
-  const getSpots = (increment) => {
-    const currentDay = state.day;
-    const foundDay = state.days.find((day) => day.name === currentDay);
-
-    increment ? (foundDay.spots -= 1) : (foundDay.spots += 1);
-
+  const getSpots = function (id, appointments) {
+    const currentDay = state.days.find((day) => day.appointments.includes(id));
+    let counter = 0;
+    for (const id of currentDay.appointments) {
+      if (!appointments[id].interview) {
+        counter++;
+      }
+    }
+    const updatedDay = { ...currentDay, spots: counter };
     const days = [...state.days];
-    days[foundDay.id] = foundDay;
-
+    const index = days.findIndex((item) => item.name === currentDay.name);
+    days.splice(index, 1, updatedDay);
     return days;
   };
-
   return { state, setDay, bookInterview, cancelInterview };
 };
 
