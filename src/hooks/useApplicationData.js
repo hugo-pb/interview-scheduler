@@ -24,7 +24,31 @@ const useApplicationData = () => {
     });
   }, []);
 
+  console.log(state);
+
   function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    const days = getSpots(true);
+
+    return axios
+      .put(`/api/appointments/${id}`, { interview: { ...interview } })
+      .then(() => {
+        setState({
+          ...state,
+          appointments,
+          days,
+        });
+      });
+  }
+
+  function editInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -41,7 +65,6 @@ const useApplicationData = () => {
           ...state,
           appointments,
         });
-        getSpots(true);
       });
   }
 
@@ -55,24 +78,49 @@ const useApplicationData = () => {
       ...state.appointments,
       [id]: appointment,
     };
+    const days = getSpots(false);
 
     return axios.delete(`/api/appointments/${id}`).then(() => {
       setState({
         ...state,
         appointments,
+        days,
       });
-      getSpots(false);
     });
   };
 
   const getSpots = (increment) => {
+    // get current day passed from parameter (state)
+    const currentDay = state.day;
+
+    // find appointment with param id to see if null
     if (increment) {
-      return console.log("adding one");
+      const foundDay = state.days.find((day) => day.name === currentDay);
+      foundDay.spots = foundDay.spots - 1;
+      //find day and change it
+
+      const days = state.days.map((day) => {
+        if (day.name === currentDay) {
+          return foundDay;
+        }
+        return day;
+      });
+
+      return days;
     }
-    return console.log("removing one");
+
+    const foundDay = state.days.find((day) => day.name === currentDay);
+    foundDay.spots = foundDay.spots + 1;
+    const days = state.days.map((day) => {
+      if (day.name === currentDay) {
+        return foundDay;
+      }
+      return day;
+    });
+    return days;
   };
 
-  return { state, setDay, bookInterview, cancelInterview };
+  return { state, setDay, bookInterview, cancelInterview, editInterview };
 };
 
 export default useApplicationData;
