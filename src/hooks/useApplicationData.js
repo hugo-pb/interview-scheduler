@@ -72,16 +72,16 @@ const useApplicationData = () => {
 
   const getSpots = function (id, appointments) {
     const currentDay = state.days.find((day) => day.appointments.includes(id));
-    let counter = 0;
+    let spots = 0;
     for (const id of currentDay.appointments) {
       if (!appointments[id].interview) {
-        counter++;
+        spots++;
       }
     }
-    const updatedDay = { ...currentDay, spots: counter };
-    const days = [...state.days];
-    const index = days.findIndex((item) => item.name === currentDay.name);
-    days.splice(index, 1, updatedDay);
+
+    const updatedDay = { ...currentDay, spots };
+    const days = state.days.map((d) => (d.name === state.day ? updatedDay : d));
+
     return days;
   };
   return { state, setDay, bookInterview, cancelInterview };
