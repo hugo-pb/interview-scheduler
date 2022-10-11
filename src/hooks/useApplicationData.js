@@ -35,6 +35,8 @@ const useApplicationData = () => {
       ...state.appointments,
       [id]: appointment,
     };
+
+    /// i
     const days = getSpots(true);
 
     return axios
@@ -44,26 +46,6 @@ const useApplicationData = () => {
           ...state,
           appointments,
           days,
-        });
-      });
-  }
-
-  function editInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview },
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment,
-    };
-
-    return axios
-      .put(`/api/appointments/${id}`, { interview: { ...interview } })
-      .then(() => {
-        setState({
-          ...state,
-          appointments,
         });
       });
   }
@@ -90,37 +72,18 @@ const useApplicationData = () => {
   };
 
   const getSpots = (increment) => {
-    // get current day passed from parameter (state)
     const currentDay = state.day;
-
-    // find appointment with param id to see if null
-    if (increment) {
-      const foundDay = state.days.find((day) => day.name === currentDay);
-      foundDay.spots = foundDay.spots - 1;
-      //find day and change it
-
-      const days = state.days.map((day) => {
-        if (day.name === currentDay) {
-          return foundDay;
-        }
-        return day;
-      });
-
-      return days;
-    }
-
     const foundDay = state.days.find((day) => day.name === currentDay);
-    foundDay.spots = foundDay.spots + 1;
-    const days = state.days.map((day) => {
-      if (day.name === currentDay) {
-        return foundDay;
-      }
-      return day;
-    });
+
+    increment ? (foundDay.spots -= 1) : (foundDay.spots += 1);
+
+    const days = [...state.days];
+    days[foundDay.id] = foundDay;
+
     return days;
   };
 
-  return { state, setDay, bookInterview, cancelInterview, editInterview };
+  return { state, setDay, bookInterview, cancelInterview };
 };
 
 export default useApplicationData;
