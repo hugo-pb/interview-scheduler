@@ -14,7 +14,7 @@ it("defaults to Monday and changes the schedule when a new day is selected", asy
 
   await waitForElement(() => getByText("Monday"));
 });
-xit("defaults to Monday and changes the schedule when a new day is selected", () => {
+it("defaults to Monday and changes the schedule when a new day is selected", () => {
   const { getByText } = render(<Application />);
 
   return waitForElement(() => getByText("Monday")).then(() => {
