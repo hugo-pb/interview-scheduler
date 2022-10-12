@@ -24,8 +24,6 @@ const useApplicationData = () => {
     });
   }, []);
 
-  console.log(state);
-
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],

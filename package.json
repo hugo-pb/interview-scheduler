@@ -65,6 +65,7 @@
     ],
     "collectCoverageFrom": [
       "src/**/*.js",
+      "src/**/*.jsx",
       "!src/index.js"
     ]
   },
