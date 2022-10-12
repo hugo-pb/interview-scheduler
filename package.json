@@ -63,6 +63,7 @@
       "<rootDir>/node_modules/",
       "<rootDir>/.git/"
     ],
+    "resetMocks": false,
     "collectCoverageFrom": [
       "src/**/*.js",
       "src/**/*.jsx",
