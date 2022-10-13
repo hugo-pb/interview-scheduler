@@ -66,7 +66,6 @@ export default {
     }
 
     if (url === "/api/appointments") {
-      /* Resolve appointments data */
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -75,7 +74,6 @@ export default {
     }
 
     if (url === "/api/interviewers") {
-      /* Resolve interviewers data */
       return Promise.resolve({
         status: 200,
         statusText: "OK",
@@ -88,12 +86,12 @@ export default {
       data: [{ data: 1 }, { data: 2 }, { data: 3 }],
     });
   }),
+
   put: jest.fn((url) => {
-    /* Resolve appointments data */
     return Promise.resolve({ status: 204, statusText: "No Content" });
   }),
+
   delete: jest.fn((url) => {
-    /* Resolve appointments data */
     return Promise.resolve({ status: 204, statusText: "No Content" });
   }),
 };

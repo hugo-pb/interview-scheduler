@@ -21,3 +21,13 @@ npm test
 ```sh
 npm run storybook
 ```
+
+### notes
+
+fuction names / variable names
+
+smaller commits and more specific
+
+walk the evaluator on how to use the app.
+
+"welcome message to the developer. "
