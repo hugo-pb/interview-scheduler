@@ -1,6 +1,6 @@
 # Interview Scheduler
 
-This programme was created to aid students in polishing their interview techniques. Any day of the week, a student can schedule an appointment with a mentor who is available.
+This web application was created to aid students in polishing their interview techniques. Any day of the week, a student can schedule an appointment with a mentor who is available.
 
 !['img of home page'](https://github.com/hugo-pb/interview-scheduler/blob/master/docs/homepage.png)
 
