@@ -1,5 +1,11 @@
 # Interview Scheduler
 
+This programme was created to aid students in polishing their interview techniques. Any day of the week, a student can schedule an appointment with a mentor who is available.
+
+## Built With
+
+- [![React][react.js]][react-url]
+
 ## Setup
 
 Install dependencies with `npm install`.
@@ -23,11 +29,3 @@ npm run storybook
 ```
 
 ### notes
-
-fuction names / variable names
-
-smaller commits and more specific
-
-walk the evaluator on how to use the app.
-
-"welcome message to the developer. "
