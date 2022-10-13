@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 const useApplicationData = () => {
   const [state, setState] = useState({
     day: "Monday",
@@ -24,19 +25,21 @@ const useApplicationData = () => {
     });
   }, []);
 
-  function bookInterview(id, interview) {
+  function bookInterview(appointmentId, interview) {
     const appointment = {
-      ...state.appointments[id],
+      ...state.appointments[appointmentId],
       interview: { ...interview },
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [appointmentId]: appointment,
     };
 
-    const days = getSpots(id, appointments);
+    const days = getSpots(appointmentId, appointments);
     return axios
-      .put(`/api/appointments/${id}`, { interview: { ...interview } })
+      .put(`/api/appointments/${appointmentId}`, {
+        interview: { ...interview },
+      })
       .then(() => {
         setState({
           ...state,
@@ -46,18 +49,18 @@ const useApplicationData = () => {
       });
   }
 
-  const cancelInterview = (id) => {
+  const cancelInterview = (appointmentId) => {
     const appointment = {
-      ...state.appointments[id],
+      ...state.appointments[appointmentId],
       interview: null,
     };
     const appointments = {
       ...state.appointments,
-      [id]: appointment,
+      [appointmentId]: appointment,
     };
-    const days = getSpots(id, appointments);
+    const days = getSpots(appointmentId, appointments);
 
-    return axios.delete(`/api/appointments/${id}`).then(() => {
+    return axios.delete(`/api/appointments/${appointmentId}`).then(() => {
       setState({
         ...state,
         appointments,
@@ -66,17 +69,21 @@ const useApplicationData = () => {
     });
   };
 
-  const getSpots = function (id, appointments) {
-    const currentDay = state.days.find((day) => day.appointments.includes(id));
+  const getSpots = function (appointmentId, appointments) {
+    const currentDay = state.days.find((day) =>
+      day.appointments.includes(appointmentId)
+    );
     let spots = 0;
-    for (const id of currentDay.appointments) {
-      if (!appointments[id].interview) {
+    for (const appointmentId of currentDay.appointments) {
+      if (!appointments[appointmentId].interview) {
         spots++;
       }
     }
 
     const updatedDay = { ...currentDay, spots };
-    const days = state.days.map((d) => (d.name === state.day ? updatedDay : d));
+    const days = state.days.map((day) =>
+      day.name === state.day ? updatedDay : day
+    );
 
     return days;
   };
