@@ -34,7 +34,6 @@ const useApplicationData = () => {
       [id]: appointment,
     };
 
-    /// i
     const days = getSpots(id, appointments);
     return axios
       .put(`/api/appointments/${id}`, { interview: { ...interview } })
@@ -48,7 +47,6 @@ const useApplicationData = () => {
   }
 
   const cancelInterview = (id) => {
-    // set interview of appointment to null
     const appointment = {
       ...state.appointments[id],
       interview: null,
