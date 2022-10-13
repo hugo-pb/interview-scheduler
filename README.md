@@ -2,10 +2,6 @@
 
 This programme was created to aid students in polishing their interview techniques. Any day of the week, a student can schedule an appointment with a mentor who is available.
 
-## Built With
-
-- [![React][react.js]][react-url]
-
 ## Setup
 
 Install dependencies with `npm install`.
@@ -28,4 +24,14 @@ npm test
 npm run storybook
 ```
 
-### notes
+## Running Errors
+
+```sh
+nnpm run error
+```
+
+## Back End
+
+https://github.com/hugo-pb/scheduler-api
+
+- In order to properly run this application youll need to configure a back end. click on the link bellow and follow the setup instructions on the README file.
