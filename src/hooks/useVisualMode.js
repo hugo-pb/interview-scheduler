@@ -1,5 +1,11 @@
 import { useState } from "react";
 
+/**
+ * @description Custom hook to manage the current mode
+ * @param {*} initial Initial visual mode
+ * @returns Object with mode and fucntions to change mode
+ */
+
 const useVisualMode = (initial) => {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
@@ -15,7 +21,7 @@ const useVisualMode = (initial) => {
     }
   };
 
-  const back = () => {
+  const back = (cars) => {
     if (history.length > 1) {
       setMode(history.at(-2));
       const newHistory = [...history];

@@ -30,12 +30,14 @@ const useApplicationData = () => {
       ...state.appointments[appointmentId],
       interview: { ...interview },
     };
+
     const appointments = {
       ...state.appointments,
       [appointmentId]: appointment,
     };
 
     const days = getSpots(appointmentId, appointments);
+
     return axios
       .put(`/api/appointments/${appointmentId}`, {
         interview: { ...interview },
